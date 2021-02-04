@@ -23,7 +23,7 @@ describe('Lottery Contract', () =>{
         assert.ok(lottery.options.address);
     });
 
-    it('allows one account to enter', async () =>{
+    it('Allows one account to enter', async () =>{
         await lottery.methods.enter().send({
             from: accounts[0],
             value: web3.utils.toWei('0.02', 'ether')
@@ -42,7 +42,7 @@ describe('Lottery Contract', () =>{
     });
 
 
-    it('allows multiple accounts to enter', async () =>{
+    it('Allows multiple accounts to enter', async () =>{
         await lottery.methods.enter().send({
             from: accounts[0],
             value: web3.utils.toWei('0.02', 'ether')
@@ -75,7 +75,7 @@ describe('Lottery Contract', () =>{
         assert.strictEqual(3, players.length);
     });
 
-    it('requires a minimum ether value', async () =>{
+    it('check a manimum ether value', async () =>{
         try{
             await lottery.methods.enter().send({
                 from: accounts[0],
@@ -89,7 +89,7 @@ describe('Lottery Contract', () =>{
         
     });
 
-    it('only manager can call pickWinner', async () =>{
+    it('Only the manager can call pickWinner', async () =>{
         try{
             await lottery.methods.pickWinner().send({
                 from:accounts[1]
@@ -114,7 +114,6 @@ describe('Lottery Contract', () =>{
 
 
         const finalBalance = await web3.eth.getBalance(accounts[0]);
-
         const difference = finalBalance - initialBalance;
         console.log(difference);
         assert(difference > web3.utils.toWei('1.8', 'ether'))
